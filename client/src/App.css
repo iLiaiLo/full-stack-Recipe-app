@@ -1,197 +1,187 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-*{
-  margin:0;
-  font-family: "barlow",sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  margin: 0;
+  font-family: "barlow", sans-serif;
   box-sizing: border-box;
 }
 
-.navigation{
+.navigation {
   display: flex;
-  gap:10px;
+  gap: 10px;
   background-color: #add8e6;
-  width:fit-content;
-  position:sticky;
-  top:0;
+  width: fit-content;
+  position: sticky;
+  top: 0;
   opacity: 0.8;
 }
-.active{
+.active {
   background-color: #64f364;
-  color:#ffffff;
+  color: #ffffff;
 }
 
-.navigation *{
+.navigation * {
   text-decoration: none;
   padding: 10px;
-  font-size:25px;
+  font-size: clamp(20px, 3vw, 2rem);
   letter-spacing: 1px;
 }
+/* ------------------------recipes and favourites--------------------------------- */
 
-.Recipes{
-  /* display:flex;
-  flex-wrap:wrap;
-  gap:20px; */
+.Recipes,
+.favourites {
   display: grid;
   place-items: center;
-	grid-template-rows: repeat(5,1fr);
-  /* (3,1fr )*/
-	grid-template-columns: repeat(auto-fill,minmax(400px, 1fr));
-	gap: 12px;
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 12px;
 }
 
-.Recipe{
-  width:max(30vw,300px);
-  border:2px solid #303030;
+.Recipe,
+.favourite {
+  width: 85%;
+  border: 2px solid #303030;
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap:10px;
-  margin:10px 0;
+  gap: 15px;
+  margin: 10px 0;
   font-weight: bold;
+  box-shadow: 1px 2px 1px #2f2d2d;
 }
-.Recipe header{
-  font-size:18px;
+.Recipe header,
+.favourite header {
+  font-size: 20px;
   text-align: center;
+  word-break: keep-all;
 }
-.Recipe img{
-  width:min(300px , 100%);
-  height: 300px;
-}
-.Recipe button{
-  width:100px;
-  height: 30px;
-  border:none;
-  border-radius: 10px;
-  font-size:20px;
-  background-color: #d65454;
-  color:#ffffff;
-  margin-bottom: 10px;
-  cursor:pointer;
+.Recipe img,
+.favourite img {
+  width: min(100%, 500px);
+  height: 400px;
 }
 
-.Recipe button:hover{
+@media screen and (max-width: 400px) {
+  .Recipes {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+}
+.Recipe button {
+  width: 100px;
+  height: 30px;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+  background-color: #d65454;
+  color: #ffffff;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.Recipe button:hover {
   background-color: #be3636;
 }
-/* .singleParent{
-   display: flex;
-  justify-content: center; 
-} */
-.singleRecipe{
-  margin-top:20px;
-  display:flex;
-  align-items:center;
-  flex-direction:column;
-  gap:20px;
+
+.hierarchy {
+  border: 1px solid #2f2d2d;
+  box-shadow: 0px 0px 1px #2f2d2d;
+  width: 100%;
 }
 
+.singleRecipe {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
 
-.singleRecipe h1{
+.singleRecipe h1 {
   text-align: center;
 }
-.singleRecipe section{
-  margin:0 30px;
+
+.singleRecipe img {
+  width: min(300px, 100%);
+  height: 300px;
+}
+.singleRecipe section {
+  margin: 0 30px;
 }
 
-.singleRecipe section header{
+.singleRecipe section header {
   text-align: center;
-  font-size:25px;
+  margin-top: 40px;
+  font-size: 35px;
   letter-spacing: 1px;
 }
 
-.singleRecipe section div{
-  margin-top:10px;
-  font-size:20px;
+.singleRecipe section div {
+  margin-top: 10px;
+  font-size: 20px;
   letter-spacing: 1px;
   font-weight: 500;
   line-height: 27px;
 }
 
-.singleRecipe section ol{
-  padding:15px;
+.singleRecipe section ol {
+  padding: 15px;
 }
 
-.singleRecipe section ol li,.singleRecipe section ol li div{
+.singleRecipe section ol li,
+.singleRecipe section ol li div {
   font-size: 20px;
-  margin:2rem 0;
+  margin: 2rem 0;
 }
-.singleRecipe section header{
+.singleRecipe section header {
   font-weight: bold;
 }
-.singleRecipe button{
-  padding:15px;
-  font-size:18px;
+.singleRecipe button {
+  padding: 15px;
+  font-size: 18px;
   background-color: #cb3a3a;
-  color:#ffffff;
-  border:none;
-  border-radius:15px;
-  margin-bottom:10px;
-  cursor:pointer;
-}
-
-.singleRecipe button:hover{
-  background-color: #a92626;
-}
-
-.singleRecipe i{
-  font-size:20px;
-  letter-spacing:1px;
-}
-
-.favourites{
-  margin:30px 10px;
-  display: grid;
-  place-items: center;
-	/* grid-template-rows: repeat(5,1fr); */
-  /* (3,1fr )*/
-	grid-template-columns: repeat(auto-fill,minmax(400px, 1fr));
-	gap: 12px;
-  /* display:flex;
-  flex-wrap:wrap;
-  gap:30px; */ 
-}
-.favourite{
-  width:max(30vw , 300px);
-  border:2px solid #303030;
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-  align-items:center;
-}
-
-.favourite img{
-  width:min(300px , 100%);
-  height: 300px;
-}
-
-.favourite header{
-  text-align: center;
-  font-size:16px;
-  font-weight:600;
-  word-break: keep-all;
-}
-
-.favourite button{
-  padding:10px;
-  border:none;
-  border-radius:10px;
-  font-size:18px;
-  background-color: #cb3a3a;
-  color:white;
+  color: #ffffff;
+  border: none;
+  border-radius: 15px;
+  margin-bottom: 10px;
   cursor: pointer;
 }
-.favourite button:hover{
+
+.singleRecipe button:hover {
   background-color: #a92626;
 }
-.favourite button:last-child{
-  margin-bottom:10px;
+
+.singleRecipe i {
+  font-size: 20px;
+  letter-spacing: 1px;
 }
-.Message{
-  text-align:center;
+/* ------------------------favourites----------------------------------------- */
+
+.favourite button {
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  background-color: #cb3a3a;
+  color: #ffffff;
+  cursor: pointer;
+}
+.favourite button:hover {
+  background-color: #a92626;
+}
+.favourite button:last-child {
+  margin-bottom: 10px;
+}
+/* ------------------------message-------------------------- */
+.Message {
+  text-align: center;
   font-style: italic;
-  position:absolute;
-  top:30%;
-  left:50%;
-  transform: translate(-50%,-50%);
-  font-size:30px;
-  text-shadow: 0 0 5px grey;
-  color:rgb(44, 43, 42);
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 30px;
+  text-shadow: 0 0 5px #808080;
+  color: #2c2b2a;
 }
