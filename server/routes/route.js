@@ -1,45 +1,16 @@
-const express=require("express");
-const Recipes=require(".././models/db");
-const Favourites=require(".././models/favouritesDb");
-const router=express.Router();
+import express from "express";
+import getAllRecipes from "../controllers/getRecipes.js";
+import getSingleRecipe from "../controllers/getSingleRecipe.js";
+import getFavourites from "../controllers/getFavourites.js";
+import addFavourites from "../controllers/addFavourites.js";
+import removeFavourite from "../controllers/removeFavourite.js";
+const router = express.Router();
 
-router.get("/",async (req,res)=>{
-    try {
-        const data=await Recipes.find()
-        res.status(200).json(data);
-    } catch (error) {
-        res.status(500).json({error:error})
-    }
-})
+router.get("/favourites", getFavourites);
+router.post("/favourites", addFavourites);
+router.delete("/favourites/remove/:id", removeFavourite);
 
-router.post("/favourites",async (req,res)=>{
-    try {
-        const data=req.body;
-        const favourite=new Favourites(data);
-        await favourite.save()
-        res.status(201).json(data)
-    } catch (error) {
-        res.status(500).json({error:error})
-    }
-})
+router.get("/", getAllRecipes);
+router.get("/:id", getSingleRecipe);
 
-router.get("/favourites",async (req,res)=>{
-    try {
-        const data=await Favourites.find()
-        res.status(200).json(data)
-    } catch (error) {
-        res.status(500).json({error:error})
-    }
-})
-
-router.delete("/favourites/:id",async (req,res)=>{
-    try {
-        const Id=+req.params.id;
-        const data=await Favourites.deleteOne({id:Id})
-        res.status(200).json(data)
-    } catch (error) {
-        res.status(500).json({error:error})
-    }
-})
-
-module.exports=router
+export default router;

@@ -1,26 +1,30 @@
-const express=require("express");
-const cors=require("cors");
-const mongoose=require("mongoose");
-const app=express();
-const router=require("./routes/route")
-require("dotenv").config();
+import express from "express";
+import cors from "cors";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import router from "./routes/route.js";
 
-const PORT=process.env.port || 5000;
-const URI=process.env.URI;
+const app = express();
+dotenv.config();
 
+const PORT = process.env.port;
+const URI = process.env.URI;
 
-app.use(express.json())
-app.use(cors({
-    origin:'http://localhost:5173',
-    methods:["GET","POST","PUT","PATCH","DELETE"],
-    allowedHeaders:"Content-type"
-}))
+app.use(express.json());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: "Content-type",
+  })
+);
 
-app.use('/recipes',router);
+app.use("/recipes", router);
 
-mongoose.connect(URI).then(()=>{
-    console.log("connected to database")
-    app.listen(PORT,()=>console.log(`serveer running on port: ${PORT}`))
-})
-.catch(e=>console.log(e))
-
+mongoose
+  .connect(URI)
+  .then(() => {
+    console.log("connected to database");
+    app.listen(PORT, () => console.log(`serveer running on port: ${PORT}`));
+  })
+  .catch((e) => console.log(e));
