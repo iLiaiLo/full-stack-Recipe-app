@@ -1,37 +1,32 @@
-import { useEffect,useState} from "react";
 import { NavLink } from "react-router-dom";
-import {fetchData} from "../foodData/fetchData";
-
-
+import Loading from "../statusPages/Loading";
+import ErrorPage from "../statusPages/ErrorPage";
+import useFetchRecipes from "../hooks/useFetchRecipes";
 const Home = () => {
+  const { recipes, loading, error } = useFetchRecipes();
 
-    const [recipeData,setRecipeData]=useState([])
+  if (error) {
+    return <ErrorPage error={error} />;
+  }
+  if (loading) {
+    return <Loading />;
+  }
 
-    useEffect(()=>{
-        const Data=async ()=>{
-            try {
-               const data=await fetchData();
-               setRecipeData(data)
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        Data()
-    },[])
-    
   return (
     <div className="Recipes">
-        
-        {recipeData.map((recipe,index)=>{
-            return <div key={index} className="Recipe">
-                <header>{recipe.name}</header>
-                <img src={recipe.thumbnail_url} alt="Image"  />
-                <NavLink to={`/${recipe.id}`}><button>view</button></NavLink>
-            </div>
-        })}
-    
+      {recipes.map((recipe, index) => {
+        return (
+          <div key={index} className="Recipe">
+            <header>{recipe.name}</header>
+            <img src={recipe.thumbnail_url} alt="Image" />
+            <NavLink to={`/${recipe.id}`}>
+              <button>view</button>
+            </NavLink>
+          </div>
+        );
+      })}
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
